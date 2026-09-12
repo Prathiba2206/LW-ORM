@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "prebuild": "npm run build -w @prathiba/light-orm",
     "build": "tsc -p tsconfig.json && node scripts/copy-public.mjs",
     "dev": "tsx watch src/server.ts",
     "start": "node dist/server.js",
