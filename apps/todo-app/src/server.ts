@@ -25,10 +25,17 @@ app.use((error: unknown, _req: express.Request, res: express.Response, _next: ex
   res.status(500).json({ error: "Something went wrong." });
 });
 
-// Start up: create tables if needed, then listen
+// Start up: create tables if needed
 await initializeDatabase();
-const server = app.listen(port, () => console.log(`Todo app listening on http://localhost:${port}`));
 
-// Shut down cleanly when we get a signal
-process.on("SIGINT", () => server.close(() => closeDatabase().then(() => process.exit(0))));
-process.on("SIGTERM", () => server.close(() => closeDatabase().then(() => process.exit(0))));
+// Export the app for serverless deployment (Vercel)
+export default app;
+
+// Only listen if we are running locally or not in Vercel
+if (!process.env.VERCEL) {
+  const server = app.listen(port, () => console.log(`Todo app listening on http://localhost:${port}`));
+  
+  // Shut down cleanly when we get a signal
+  process.on("SIGINT", () => server.close(() => closeDatabase().then(() => process.exit(0))));
+  process.on("SIGTERM", () => server.close(() => closeDatabase().then(() => process.exit(0))));
+}
