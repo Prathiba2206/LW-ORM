@@ -1,0 +1,24 @@
+{
+  "name": "@prathiba/light-orm",
+  "version": "0.1.0",
+  "description": "A small, strongly typed ORM for serverless PostgreSQL",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
+  "files": ["dist", "README.md", "LICENSE"],
+  "scripts": {
+    "clean": "node scripts/clean.mjs",
+    "build": "npm run clean && tsc -p tsconfig.build.json",
+    "test": "tsc -p tsconfig.test.json && node --test .test-dist/*.test.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "prepublishOnly": "npm test"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "typescript": "^5.8.2"
+  },
+  "keywords": ["orm", "typescript", "postgres", "serverless", "neon", "supabase"],
+  "license": "MIT",
+  "publishConfig": { "access": "public" }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "lightweight-orm-assignment",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": ["packages/*", "apps/*"],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "dev": "npm run dev --workspace=@prathiba/todo-app",
+    "start": "npm run start --workspace=@prathiba/todo-app",
+    "test": "npm run test --workspace=@prathiba/light-orm",
+    "typecheck": "npm run typecheck --workspace=@prathiba/light-orm && npm run build --workspace=@prathiba/light-orm && npm run typecheck --workspace=@prathiba/todo-app"
+  },
+  "engines": { "node": ">=20" }
+}
